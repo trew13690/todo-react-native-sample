@@ -1,16 +1,28 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useState} from 'react';
+import { StyleSheet, Text, View, Button } from 'react-native';
 
 export default function App() {
+  const [name, setName] = useState('Trew');
+  const [person, setPerson] = useState({name: "Mai", age: 21})
+  const clickHandler = () => {
+      if (name === 'Trew')
+      {
+          setName('Mai');
+          setPerson({name: "Mai", age: 21})
+      }
+      else{
+          setName("Trew")
+
+          setPerson({name: "Alex", age: 28})
+      }
+  }
+
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-       <Text style={styles.boldText}>I am pink cow for my wife</Text>
-    </View>
-      <View style={styles.body}>
-        <Text stykle={styles.boldText}><Text>Sample text</Text> ipsum dolor sit amet</Text>
-        <Text>Lorem ipsum dolor sit amet</Text>
-        <Text>Lorem ipsum dolor sit amet</Text>
+      <Text>My name is {name}</Text>
+      <Text>Her name is {person.name} and her age is {person.age}</Text>
+      <View style={styles.buttonContainer}>
+       <Button title="Update Name" onPress={clickHandler}/>
       </View>
     </View>
 
@@ -24,15 +36,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  header: {
-    backgroundColor: 'pink',
-    padding: 20,
-  },
-  boldText: {
-    fontWeight: 'bold',
-  },
-  body: {
-    backgroundColor: 'yellow',
-    padding: 20,
-  }
+    buttonContainer: {
+      marginTop: 20
+    }
 });
