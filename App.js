@@ -1,16 +1,23 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, FlatList, ScrollView, TouchableOpacity } from 'react-native';
-import header from './components/header';
 import Header from "./components/header";
+import TodoItem from "./components/TodoItem";
+
 
 export default function App() {
 
     const [todos, setTodos] = useState([
         {text: 'Buy Coffe', key: '1'},
-        {text: 'Fuck my wfie', key: '2'},
-        {text: 'Tell my wife I love her', key: '3'},
+        {text: 'Fuck my Wife', key: '2'},
+        {text: 'Tell my Wife I love her', key: '3'},
         {text: 'Work hard on GigaGov', key: '4'}
     ])
+
+    const pressHandler = (key) => {
+        setTodos((prevTodos) => {
+            return prevTodos.filter(todo => todo.key != key);
+        });
+    }
 
   return (
   <View style={styles.container}>
@@ -21,7 +28,7 @@ export default function App() {
               <FlatList
                 data={todos}
                 renderItem={({item}) => (
-                    <Text>{item.text}</Text>
+                    <TodoItem item={item} pressHandler={pressHandler}/>
                 )}
               />
           </View>
