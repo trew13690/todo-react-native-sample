@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, View, FlatList, ScrollView, TouchableOpacity } from 'react-native';
 import Header from "./components/header";
 import TodoItem from "./components/TodoItem";
+import AddToDo from "./components/addTodo";
 
 
 export default function App() {
@@ -15,20 +16,28 @@ export default function App() {
 
     const pressHandler = (key) => {
         setTodos((prevTodos) => {
-            return prevTodos.filter(todo => todo.key != key);
+            return prevTodos.filter(todo => todo.key !== key);
         });
     }
 
+    const submitHandler = (text) => {
+        setTodos( (prevTodos) => {
+            return [
+                {text: text, key: Math.random().toString()},
+                ...prevTodos
+            ];
+        })
+    }
   return (
   <View style={styles.container}>
       <Header />
       <View style={styles.content}>
-          {/* to form */}
+          <AddToDo submitHandler={submitHandler}/>
           <View style={styles.list}>
               <FlatList
                 data={todos}
                 renderItem={({item}) => (
-                    <TodoItem item={item} pressHandler={pressHandler}/>
+                    <TodoItem item={item}  pressHandler={pressHandler}/>
                 )}
               />
           </View>
