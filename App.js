@@ -4,7 +4,6 @@ import Header from "./components/header";
 import TodoItem from "./components/TodoItem";
 import AddToDo from "./components/addTodo";
 import Sandbox from "./components/sandbox";
-
 export default function App() {
 
     const [todos, setTodos] = useState([
